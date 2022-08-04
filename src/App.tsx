@@ -4,24 +4,31 @@ import styles from "./app.module.scss";
 
 function App() {
   const [doctorsData, setDoctorsData] = useState([]);
+  const [fetchError, setFetchError] = useState(null);
+
   useEffect(() => {
     const fetchItems = async () => {
       try {
         const response = await fetch("http://localhost:8000/doctors");
+        if (!response.ok) throw Error("Did not receive expected data");
         const listItems = await response.json();
         console.log(listItems);
         setDoctorsData(listItems);
-      } catch (err) {
+        setFetchError(null);
+      } catch (error: any) {
         setDoctorsData([]);
-        console.log(err);
+        setFetchError(error.message);
       }
     };
 
     (() => fetchItems())();
-    console.log("doctorsData,", doctorsData);
   }, []);
 
-  return <div className={styles.App}></div>;
+  return (
+    <div className={styles.App}>
+      {fetchError ? <p>{fetchError}</p> : <p>ok</p>}
+    </div>
+  );
 }
 
 export default App;
