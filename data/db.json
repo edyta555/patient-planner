@@ -1,0 +1,16 @@
+{
+  "doctors": [
+    {
+      "first name": "Jan",
+      "surname": "Pietrzak",
+      "phone number": 523232322,
+      "id": 1
+    },
+    {
+      "first name": "Anna",
+      "surname": "Nowak",
+      "phone number": 567123444,
+      "id": 2
+    }
+  ]
+}
