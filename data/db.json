@@ -1,15 +1,15 @@
 {
   "doctors": [
     {
-      "first name": "Jan",
+      "firstName": "Jan",
       "surname": "Pietrzak",
-      "phone number": 523232322,
+      "phoneNumber": 523232322,
       "id": 1
     },
     {
-      "first name": "Anna",
+      "firstName": "Anna",
       "surname": "Nowak",
-      "phone number": 567123444,
+      "phoneNumber": 567123444,
       "id": 2
     }
   ]
