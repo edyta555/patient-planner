@@ -9,11 +9,10 @@ export const DoctorList = ({
 }: {
   doctorsData: doctorDataType[];
 }) => {
-  console.log("doctorsData", doctorsData);
   return (
     <div className={styles["doctor-list-container"]}>
-      {doctorsData.map((doctorData) => (
-        <DoctorTile doctorData={doctorData} />
+      {doctorsData.map(doctorData => (
+        <DoctorTile key={doctorData.id} doctorData={doctorData} />
       ))}
     </div>
   );

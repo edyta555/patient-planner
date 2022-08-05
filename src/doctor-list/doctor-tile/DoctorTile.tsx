@@ -17,13 +17,13 @@ export const DoctorTile = ({ doctorData }: { doctorData: doctorDataType }) => {
     return list.join(", ");
   };
   return (
-    <div className={styles.tile} key={id}>
+    <div className={styles.tile}>
       <div className={styles["first-column"]}>
         <div className={styles["first-row"]}>
           <div className={styles["photo-container"]}>
             <img
               src={require(`./images/${id}.svg`)}
-              alt={`photo of ${firstName} ${surname}`}
+              alt={`${firstName} ${surname}`}
             />
           </div>
           <div className={styles["main-info"]}>
