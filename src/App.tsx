@@ -3,8 +3,18 @@ import { useState, useEffect } from "react";
 import styles from "./app.module.scss";
 import { DoctorList } from "./doctor-list/DoctorLIst";
 
+export type doctorDataType = {
+  firstName: string;
+  surname: string;
+  adress: string;
+  phoneNumber: number;
+  academicTitle: string;
+  specializations: string[];
+  id: number;
+};
+
 function App() {
-  const [doctorsData, setDoctorsData] = useState([]);
+  const [doctorsData, setDoctorsData] = useState<doctorDataType[]>([]);
   const [fetchError, setFetchError] = useState(null);
 
   useEffect(() => {
