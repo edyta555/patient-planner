@@ -16,11 +16,13 @@ export type doctorDataType = {
 function App() {
   const [doctorsData, setDoctorsData] = useState<doctorDataType[]>([]);
   const [fetchError, setFetchError] = useState(null);
+  const backendURL = 'http://localhost:8000/';
+  const endpointURL = 'doctors/'
 
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await fetch("http://localhost:8000/doctors");
+        const response = await fetch(`${backendURL}${endpointURL}`);
         if (!response.ok) throw Error("Did not receive expected data");
         const listItems = await response.json();
         setDoctorsData(listItems);
@@ -31,7 +33,7 @@ function App() {
       }
     };
 
-    (() => fetchItems())();
+    fetchItems();
   }, []);
 
   return (

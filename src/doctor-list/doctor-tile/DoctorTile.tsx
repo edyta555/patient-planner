@@ -2,7 +2,11 @@ import styles from "./doctor-title.module.scss";
 
 import { doctorDataType } from "../../App";
 
-export const DoctorTile = ({ doctorData }: { doctorData: doctorDataType }) => {
+type DoctorTileProps = {
+  doctorData: doctorDataType;
+};
+
+export const DoctorTile = ({ doctorData }: DoctorTileProps) => {
   const {
     firstName,
     surname,
@@ -18,7 +22,7 @@ export const DoctorTile = ({ doctorData }: { doctorData: doctorDataType }) => {
   };
   return (
     <div className={styles.tile} key={id}>
-      <div className={styles["first-column"]}>
+      <div className={styles["doctor-info-container"]}>
         <div className={styles["first-row"]}>
           <div className={styles["photo-container"]}>
             <img
@@ -42,7 +46,7 @@ export const DoctorTile = ({ doctorData }: { doctorData: doctorDataType }) => {
           </div>
         </div>
       </div>
-      <div className={styles["second-column"]}>
+      <div className={styles["calendar-container"]}>
         <h3>miejsce na kalendarz</h3>
       </div>
     </div>
