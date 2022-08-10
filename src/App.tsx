@@ -18,13 +18,26 @@ export type doctorDataType = {
 function App() {
   const [doctorsData, setDoctorsData] = useState<doctorDataType[]>([]);
 
+  const getCityFromAdressWithUpperCase = (doctorData: doctorDataType) => {
+    return doctorData.adress.split(", ")[1].toLowerCase();
+  };
+
+  const filtersDoctorData = (city: string) => {
+    setDoctorsData(
+      doctorsDataFromFile.filter(
+        (doctorData) =>
+          getCityFromAdressWithUpperCase(doctorData) == city.toLowerCase()
+      )
+    );
+  };
+
   useEffect(() => {
     setDoctorsData(doctorsDataFromFile);
   }, []);
 
   return (
     <div className={styles.App}>
-      <FilterDoctor />
+      <FilterDoctor onFilter={filtersDoctorData} />
       <DoctorList doctorsData={doctorsData} />
     </div>
   );

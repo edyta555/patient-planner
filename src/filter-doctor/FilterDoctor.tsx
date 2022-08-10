@@ -1,6 +1,8 @@
 import { useRef } from "react";
 
-export const FilterDoctor = () => {
+import { doctorDataType } from "../App";
+
+export const FilterDoctor = ({ onFilter }: any) => {
   const cityInputRef = useRef<HTMLInputElement | null>(null);
   const specializationInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -9,6 +11,8 @@ export const FilterDoctor = () => {
     if (!cityInputRef.current || !specializationInputRef.current) {
       console.log("error");
     } else {
+      onFilter(cityInputRef.current.value);
+
       console.log(
         cityInputRef.current.value,
         specializationInputRef.current.value
