@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import FilterDoctor from "./filter-doctor/FilterDoctor";
 import { DoctorList } from "./doctor-list/DoctorLIst";
 import doctorsDataFromFile from "./data/doctors.json";
 
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <div className={styles.App}>
+      <FilterDoctor />
       <DoctorList doctorsData={doctorsData} />
     </div>
   );
