@@ -11,12 +11,7 @@ export const FilterDoctor = ({ onFilter }: any) => {
     if (!cityInputRef.current || !specializationInputRef.current) {
       console.log("error");
     } else {
-      onFilter(cityInputRef.current.value);
-
-      console.log(
-        cityInputRef.current.value,
-        specializationInputRef.current.value
-      );
+      onFilter(cityInputRef.current.value, specializationInputRef.current.value);
     }
   };
 

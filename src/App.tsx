@@ -18,16 +18,40 @@ export type doctorDataType = {
 function App() {
   const [doctorsData, setDoctorsData] = useState<doctorDataType[]>([]);
 
-  const getCityFromAdressWithUpperCase = (doctorData: doctorDataType) => {
-    return doctorData.adress.split(", ")[1].toLowerCase();
+  const checkCity = (doctorData: doctorDataType, enteredCity: string) => {
+    if (enteredCity == "") {
+      return doctorData;
+    } else {
+      const cityForDoctor = doctorData.adress.split(", ")[1].toLowerCase();
+      return enteredCity.toLowerCase() === cityForDoctor ? doctorData : null;
+    }
   };
 
-  const filtersDoctorData = (city: string) => {
+  const checkSpecialization = (
+    doctorData: doctorDataType,
+    enteredSpecializations: string
+  ) => {
+    let acceptRecord = true;
+    if (enteredSpecializations !== "") {
+      const enteredSpecializationsList = enteredSpecializations.split(" ");
+      enteredSpecializationsList.forEach((spec) => {
+        if (!doctorData.specializations.includes(spec.trim().toLowerCase())) {
+          acceptRecord = false;
+          return;
+        }
+      });
+    }
+    return acceptRecord ? doctorData : null;
+  };
+
+  const filtersDoctorData = (city: string, specializations: string) => {
     setDoctorsData(
-      doctorsDataFromFile.filter(
-        (doctorData) =>
-          getCityFromAdressWithUpperCase(doctorData) == city.toLowerCase()
-      )
+      doctorsDataFromFile.filter((doctorData) => {
+        return (
+          checkCity(doctorData, city) &&
+          checkSpecialization(doctorData, specializations)
+        );
+      })
     );
   };
 
