@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import FilterDoctor from "./filter-doctor/FilterDoctor";
+import { DoctorList } from "./doctor-list/DoctorLIst";
+import doctorsDataFromFile from "./data/doctors.json";
 
 import styles from "./app.module.scss";
-import { DoctorList } from "./doctor-list/DoctorLIst";
 
 export type doctorDataType = {
   firstName: string;
@@ -15,34 +17,55 @@ export type doctorDataType = {
 
 function App() {
   const [doctorsData, setDoctorsData] = useState<doctorDataType[]>([]);
-  const [fetchError, setFetchError] = useState(null);
-  const backendURL = 'http://localhost:8000/';
-  const endpointURL = 'doctors/'
+
+  const checkCity = (doctorData: doctorDataType, enteredCity: string) => {
+    if (enteredCity === "") {
+      return doctorData;
+    } else {
+      const cityForDoctor = doctorData.adress.split(", ")[1].toLowerCase();
+      const formattedEnteredCity = enteredCity.toLowerCase();
+      return formattedEnteredCity === cityForDoctor ? doctorData : null;
+    }
+  };
+
+  const checkSpecialization = (
+    doctorData: doctorDataType,
+    enteredSpecializations: string
+  ) => {
+    let acceptRecord = true;
+    if (enteredSpecializations.trim() !== "") {
+      const enteredSpecializationsList = enteredSpecializations
+        .split(" ")
+        .filter((element) => element);
+      enteredSpecializationsList.forEach((spec) => {
+        if (!doctorData.specializations.includes(spec.trim().toLowerCase())) {
+          acceptRecord = false;
+          return;
+        }
+      });
+    }
+    return acceptRecord ? doctorData : null;
+  };
+
+  const filtersDoctorData = (city: string, specializations: string) => {
+    setDoctorsData(
+      doctorsDataFromFile.filter((doctorData) => {
+        return (
+          checkCity(doctorData, city.trim()) &&
+          checkSpecialization(doctorData, specializations)
+        );
+      })
+    );
+  };
 
   useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const response = await fetch(`${backendURL}${endpointURL}`);
-        if (!response.ok) throw Error("Did not receive expected data");
-        const listItems = await response.json();
-        setDoctorsData(listItems);
-        setFetchError(null);
-      } catch (error: any) {
-        setDoctorsData([]);
-        setFetchError(error.message);
-      }
-    };
-
-    fetchItems();
+    setDoctorsData(doctorsDataFromFile);
   }, []);
 
   return (
     <div className={styles.App}>
-      {fetchError ? (
-        <p>{fetchError}</p>
-      ) : (
-        <DoctorList doctorsData={doctorsData} />
-      )}
+      <FilterDoctor onFilter={filtersDoctorData} />
+      <DoctorList doctorsData={doctorsData} />
     </div>
   );
 }

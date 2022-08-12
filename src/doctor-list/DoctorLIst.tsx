@@ -12,7 +12,7 @@ export const DoctorList = ({ doctorsData }: DoctorListProps) => {
   return (
     <div className={styles["doctor-list-container"]}>
       {doctorsData ? (
-        doctorsData.map((doctorData) => <DoctorTile doctorData={doctorData} />)
+        doctorsData.map((doctorData) => <DoctorTile doctorData={doctorData} key={doctorData.id}/>)
       ) : (
         <p>
           There are no doctors who meet your criteria. Please change your search

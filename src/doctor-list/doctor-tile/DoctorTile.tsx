@@ -21,13 +21,13 @@ export const DoctorTile = ({ doctorData }: DoctorTileProps) => {
     return list.join(", ");
   };
   return (
-    <div className={styles.tile} key={id}>
+    <div className={styles.tile}>
       <div className={styles["doctor-info-container"]}>
         <div className={styles["first-row"]}>
           <div className={styles["photo-container"]}>
             <img
               src={require(`./images/${id}.svg`)}
-              alt={`photo of ${firstName} ${surname}`}
+              alt={`${firstName} ${surname}`}
             />
           </div>
           <div className={styles["main-info"]}>
