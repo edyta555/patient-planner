@@ -1,0 +1,22 @@
+{
+  "doctors": [
+    {
+      "firstName": "Jan",
+      "surname": "Pietrzak",
+      "adress": "Woronicza 4/23, Warszawa",
+      "phoneNumber": 523232322,
+      "academicTitle": "",
+      "specializations": ["ginekolog", "endokrynolog"],
+      "id": 1
+    },
+    {
+      "firstName": "Anna",
+      "surname": "Nowak",
+      "adress": "Kossaka 23/2, Olsztyn",
+      "phoneNumber": 567123444,
+      "academicTitle": "dr",
+      "specializations": ["dermatolog"],
+      "id": 2
+    }
+  ]
+}
