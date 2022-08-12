@@ -1,8 +1,8 @@
 .doctor-list-container {
   display: flex;
   flex-direction: column;
+  gap: 15px;
   margin: 100px auto 50px;
   max-width: 1200px;
-  gap: 15px;
   padding: 0 30px;
 }

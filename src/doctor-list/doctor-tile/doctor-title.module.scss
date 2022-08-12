@@ -10,12 +10,12 @@ $background-color: #fff;
   min-height: 280px;
   height: max-content;
 
-  .first-column,
-  .second-column {
+  .doctor-info-container,
+  .calendar-container {
     flex: 1 1 0;
   }
 
-  .first-column {
+  .doctor-info-container {
     display: flex;
     flex-direction: column;
     border-right: 1px solid $border-color;
@@ -63,7 +63,7 @@ $background-color: #fff;
       margin-bottom: 2px;
     }
   }
-  .second-column {
+  .calendar-container {
     padding: 0 20px;
     @media only screen and (max-width: 800px) {
       display: none;

@@ -19,11 +19,12 @@ function App() {
   const [doctorsData, setDoctorsData] = useState<doctorDataType[]>([]);
 
   const checkCity = (doctorData: doctorDataType, enteredCity: string) => {
-    if (enteredCity == "") {
+    if (enteredCity === "") {
       return doctorData;
     } else {
       const cityForDoctor = doctorData.adress.split(", ")[1].toLowerCase();
-      return enteredCity.toLowerCase() === cityForDoctor ? doctorData : null;
+      const formattedEnteredCity = enteredCity.toLowerCase();
+      return formattedEnteredCity === cityForDoctor ? doctorData : null;
     }
   };
 
@@ -32,8 +33,10 @@ function App() {
     enteredSpecializations: string
   ) => {
     let acceptRecord = true;
-    if (enteredSpecializations !== "") {
-      const enteredSpecializationsList = enteredSpecializations.split(" ");
+    if (enteredSpecializations.trim() !== "") {
+      const enteredSpecializationsList = enteredSpecializations
+        .split(" ")
+        .filter((element) => element);
       enteredSpecializationsList.forEach((spec) => {
         if (!doctorData.specializations.includes(spec.trim().toLowerCase())) {
           acceptRecord = false;
@@ -48,7 +51,7 @@ function App() {
     setDoctorsData(
       doctorsDataFromFile.filter((doctorData) => {
         return (
-          checkCity(doctorData, city) &&
+          checkCity(doctorData, city.trim()) &&
           checkSpecialization(doctorData, specializations)
         );
       })

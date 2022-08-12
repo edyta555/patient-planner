@@ -4,16 +4,21 @@ import styles from "./doctor-list.module.scss";
 
 import { doctorDataType } from "../App";
 
-export const DoctorList = ({
-  doctorsData,
-}: {
+type DoctorListProps = {
   doctorsData: doctorDataType[];
-}) => {
+};
+
+export const DoctorList = ({ doctorsData }: DoctorListProps) => {
   return (
     <div className={styles["doctor-list-container"]}>
-      {doctorsData.map(doctorData => (
-        <DoctorTile key={doctorData.id} doctorData={doctorData} />
-      ))}
+      {doctorsData ? (
+        doctorsData.map((doctorData) => <DoctorTile doctorData={doctorData} key={doctorData.id}/>)
+      ) : (
+        <p>
+          There are no doctors who meet your criteria. Please change your search
+          criteria.
+        </p>
+      )}
     </div>
   );
 };
